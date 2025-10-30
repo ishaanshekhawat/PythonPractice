@@ -67,12 +67,15 @@ for i in words:
     if len(i) < lct:
         lct = len(i)
 
+# Identify the actual shortest and longest words based on lengths
 for i in words:
     if len(i) == sct:
         longest_word = i
     if len(i) == lct:
         shortest_word = i
 
+# Create a tuple containing the shortest and longest words
 sl_tuple = (shortest_word, longest_word)
 
+# Print the shortest and longest words
 print(f'Shortest and longest words: {sl_tuple}')
