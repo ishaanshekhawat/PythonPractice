@@ -12,20 +12,24 @@ para = input()
 
 # Split the paragraph into words using common punctuation and spaces as delimiters
 words = re.split(r'[ ,.;!/]+', para)
+
+# Remove any empty strings that may result from splitting
+# (e.g., if there are multiple spaces or punctuation at the ends)
 for i in words:
-    if i:
+    if i:             # if the word is not empty, keep it
         continue
-    else:
+    else:             # if the word is empty, remove it
         words.remove(i)
+
 
 print(f"Total number of words: {len(words)}")
 
 word_dict = {}
 
 for i in words:
-    if i.lower() in word_dict:
+    if i.lower() in word_dict:    
         word_dict[i.lower()] += 1
-    else:
+    else:                          
         word_dict[i.lower()] = 1
 
 unique_words = []
