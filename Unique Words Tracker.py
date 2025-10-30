@@ -60,6 +60,7 @@ print(f'Top 3 frequent words: {top_3}')
 lct = float('inf')            # start with infinity for shortest word
 sct = 0                       # start with 0 for longest word
 
+# Find the lengths of the shortest and longest words
 for i in words:
     if len(i) > sct:
         sct = len(i)
