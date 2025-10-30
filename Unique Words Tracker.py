@@ -7,8 +7,10 @@
 
 import re
 
+# Take a paragraph as input from the user
 para = input()
 
+# Split the paragraph into words using common punctuation and spaces as delimiters
 words = re.split(r'[ ,.;!/]+', para)
 for i in words:
     if i:
