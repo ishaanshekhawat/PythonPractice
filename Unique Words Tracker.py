@@ -21,41 +21,44 @@ for i in words:
     else:             # if the word is empty, remove it
         words.remove(i)
 
-
+# Print the total number of words
 print(f"Total number of words: {len(words)}")
 
+# Create a dictionary to count occurrences of each word (case-insensitive)
 word_dict = {}
-
 for i in words:
-    if i.lower() in word_dict:    
+    if i.lower() in word_dict:        # convert to lowercase for case-insensitive counting
         word_dict[i.lower()] += 1
     else:                          
         word_dict[i.lower()] = 1
 
+# Create a list of words that appear only once (unique words)
 unique_words = []
-
 for k,v in word_dict.items():
     if v == 1:
         unique_words.append(k)
 
+# Print the number of unique words
 print(f'Number of unique words: {len(unique_words)}')
 
+# Sort the dictionary by word frequency in descending order
 sorted_wc = dict(sorted(word_dict.items(), key = lambda item:item[1], reverse=True))
 
-t1 = ()
+# Extract the top 3 most frequent words
 top_3 = []
 ct = 0
 for k,v in sorted_wc.items():
-    t1 = (k,v)
-    top_3.append(t1)
+    top_3.append((k,v))            # store as tuple (word, count)
     ct += 1
-    if ct == 3:
+    if ct == 3:                    # stop after 3 words
         break
 
+# Print the top 3 frequent words with their counts
 print(f'Top 3 frequent words: {top_3}')
 
-lct = float('inf')
-sct = 0
+# Initialize variables for finding shortest and longest words
+lct = float('inf')            # start with infinity for shortest word
+sct = 0                       # start with 0 for longest word
 
 for i in words:
     if len(i) > sct:
