@@ -20,22 +20,34 @@
 # All elements in each diagonal ar identical. Thus, the answer is True.
 
 def is_same_stripes(matrix):
+    # Dictionary to store the elements of each diagonal stripe identified by their key (i - j)
     same_diagonal_elements = {}
-    for i in range(len(matrix)):
-        for j in range(len(matrix[i])):
+    
+    # Loop through each element in the matrix using row (i) and column (j) indices
+    for i in range(len(matrix)):  # Iterate through rows
+        for j in range(len(matrix[i])):  # Iterate through columns in each row
+            # Create a set to track unique values in each diagonal
             s = set()
-            # same_diagonal_elements[i-j] = s
-            if (i-j) not in same_diagonal_elements.keys():
+            
+            # Calculate the diagonal key using (i - j)
+            diagonal_key = i - j
+            
+            # If the diagonal (i - j) is not in the dictionary, add it with the current element
+            if diagonal_key not in same_diagonal_elements.keys():
                 s.add(matrix[i][j])
-                same_diagonal_elements[i-j] = s
-            elif (i-j) in same_diagonal_elements.keys():
-                s1 = same_diagonal_elements[i-j]
+                same_diagonal_elements[diagonal_key] = s
+            # If the diagonal already exists, add the current element to the set
+            elif diagonal_key in same_diagonal_elements.keys():
+                s1 = same_diagonal_elements[diagonal_key]
                 s1.add(matrix[i][j])
-                same_diagonal_elements[i-j] = s1
-    for k,v in same_diagonal_elements.items():
+                same_diagonal_elements[diagonal_key] = s1
+    
+    # After collecting all diagonal elements, check if all diagonals contain identical values
+    for k, v in same_diagonal_elements.items():
+        # If the set has more than one element, the diagonal contains different numbers
         if len(v) > 1:
             return False
-    else:
-        return True
-
+    
+    # If all diagonals are uniform, return True
+    return True
 
