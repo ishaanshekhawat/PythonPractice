@@ -16,40 +16,67 @@
 
 
 def convertToBase13(num):
+    # Variable to store remainder of division by 13
     rem = 0
+    # String to accumulate the final base-13 representation
     result = ''
+
+    # Check if the number is negative
     if str(num)[0] == '-':
+        # Convert negative number to positive for easier processing
         num = int(str(num)[1:])
-        while(num>0):
-            if num%13<10:
+        
+        # Loop to convert the number to base 13
+        while(num > 0):
+            # If remainder is less than 10, just use the digit
+            if num % 13 < 10:
                 rem = num % 13
-                num = num//13
-            elif num%13==10:
+                num = num // 13
+            # If remainder is 10, use 'A' for base 13 representation
+            elif num % 13 == 10:
                 rem = 'A'
-                num = num//13
-            elif num%13==11:
+                num = num // 13
+            # If remainder is 11, use 'B'
+            elif num % 13 == 11:
                 rem = 'B'
-                num = num//13
-            elif num%13==12:
+                num = num // 13
+            # If remainder is 12, use 'C'
+            elif num % 13 == 12:
                 rem = 'C'
-                num = num//13
+                num = num // 13
+            
+            # Prepend the remainder to the result string (since we're building the number backwards)
             result = str(rem) + result
+        
+        # Add negative sign at the beginning and return the result
         return '-' + result
+
+    # Special case: if the number is 0, simply return '0'
     elif num == 0:
-        return num
+        return str(num)
+
+    # For positive numbers, similar process as for negative
     else:
-        while(num>0):
-            if num%13<10:
+        while(num > 0):
+            # If remainder is less than 10, just use the digit
+            if num % 13 < 10:
                 rem = num % 13
-                num = num//13
-            elif num%13==10:
+                num = num // 13
+            # If remainder is 10, use 'A' for base 13 representation
+            elif num % 13 == 10:
                 rem = 'A'
-                num = num//13
-            elif num%13==11:
+                num = num // 13
+            # If remainder is 11, use 'B'
+            elif num % 13 == 11:
                 rem = 'B'
-                num = num//13
-            elif num%13==12:
+                num = num // 13
+            # If remainder is 12, use 'C'
+            elif num % 13 == 12:
                 rem = 'C'
-                num = num//13
+                num = num // 13
+            
+            # Prepend the remainder to the result string
             result = str(rem) + result
+        
+        # Return the final result as the base-13 string representation
         return result
