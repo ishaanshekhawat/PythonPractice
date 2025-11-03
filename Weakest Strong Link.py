@@ -21,26 +21,35 @@
 # No chain-link satisfies the criteria of being the weakest in its row and the strongest in its column.
 
 def weakest_strong_link(strength):
-	row_ls = []
-	for i in strength:
-		weak = i[0]
-		for j in i:
-			if j < weak:
-				weak = j
-		row_ls.append(weak)
+    # Initialize an empty list to store the weakest (minimum) value from each row
+    row_ls = []
+    
+    # Loop through each row in the 2D list 'strength'
+    for i in strength:
+        weak = i[0]  # Start by assuming the first element is the weakest in the row
+        for j in i:  # Check every element in the row
+            if j < weak:  # If a smaller value is found, update 'weak'
+                weak = j
+        row_ls.append(weak)  # Append the smallest value from this row to row_ls
 
-	col_ls = []
-	for i in range(len(strength[0])):
-		strong = strength[0][i]
-		for j in range(len(strength)):
-			if strength[j][i] > strong:
-				strong = strength[j][i]
-		col_ls.append(strong)
+    # Initialize an empty list to store the strongest (maximum) value from each column
+    col_ls = []
+    
+    # Loop through each column index (based on the first row's length)
+    for i in range(len(strength[0])):
+        strong = strength[0][i]  # Start by assuming the first element in the column is the strongest
+        for j in range(len(strength)):  # Loop through all rows for this column
+            if strength[j][i] > strong:  # If a larger value is found, update 'strong'
+                strong = strength[j][i]
+        col_ls.append(strong)  # Append the largest value from this column to col_ls
 
-	# print(row_ls)
-	# print(col_ls)
-	for i in row_ls:
-		if i in col_ls:
-			return i
-	return -1
-			
+    # print(row_ls)  # Debug: print all row minimums
+    # print(col_ls)  # Debug: print all column maximums
+
+    # Check if there’s any value that is both the weakest in its row and the strongest in its column
+    for i in row_ls:
+        if i in col_ls:
+            return i  # Return that value if found (the "weakest strong link")
+
+    # If no such value exists, return -1
+    return -1
