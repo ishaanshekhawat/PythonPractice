@@ -38,31 +38,59 @@
 
 # Explanation: L = 50, X = 10, IX = 9, LXIX = 69. Nice.
 
-from functools import reduce
+from functools import reduce  # Import reduce to sum up list elements
 
+# Function to convert a Roman numeral string into an integer
 def romanToInt(s):
-	ls = []
-	for i in s:
-		if i == 'I':
-			ls.append(1)
-		elif i == 'V':
-			ls.append(5)
-		elif i == 'X':
-			ls.append(10)
-		elif i == 'L':
-			ls.append(50)
-		elif i == 'C':
-			ls.append(100)
-		elif i == 'D':
-			ls.append(500)
-		elif i == 'M':
-			ls.append(1000)
-	ls1 = []
-	for i in range(len(ls)-1):
-		if ls[i] < ls[i+1]:
-			ls1.append(-(ls[i]))
-		else:
-			ls1.append(ls[i])
-	ls1.append(ls[-1])
-	return reduce(lambda x,y: x+y, ls1)
-		
+    ls = []  # List to store the numeric values of each Roman character
+    
+    # Step 1: Convert each Roman numeral character to its integer value
+    for i in s:
+        if i == 'I':
+            ls.append(1)
+        elif i == 'V':
+            ls.append(5)
+        elif i == 'X':
+            ls.append(10)
+        elif i == 'L':
+            ls.append(50)
+        elif i == 'C':
+            ls.append(100)
+        elif i == 'D':
+            ls.append(500)
+        elif i == 'M':
+            ls.append(1000)
+    
+    # At this point, 'ls' contains the numeric equivalent of each Roman symbol.
+    # Example: "LXIX" → [50, 10, 1, 10]
+    
+    ls1 = []  # This list will store the adjusted values considering subtraction rules
+    
+    # Step 2: Apply the subtraction rule
+    # If a smaller value appears before a larger one, we subtract it.
+    for i in range(len(ls) - 1):
+        if ls[i] < ls[i + 1]:
+            ls1.append(-ls[i])  # Subtract the smaller number
+        else:
+            ls1.append(ls[i])   # Otherwise, add it normally
+    
+    # Append the last value, since it’s always added
+    ls1.append(ls[-1])
+    
+    # Step 3: Sum up all adjusted values to get the final integer
+    return reduce(lambda x, y: x + y, ls1)
+
+
+# Example usage:
+
+# Example 1:
+# "XI" → X = 10, I = 1 → 10 + 1 = 11
+print(romanToInt("XI"))   # Output: 11
+
+# Example 2:
+# "LXIX" → L = 50, X = 10, IX = 9 → 50 + 10 + 9 = 69
+print(romanToInt("LXIX"))  # Output: 69
+
+# Example 3:
+# "MCMXCIV" → 1000 + (900) + (90) + (4) = 1994
+print(romanToInt("MCMXCIV"))  # Output: 1994
