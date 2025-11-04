@@ -11,11 +11,14 @@
 # Input: s = "lemur", t = "lemer"
 # Output: False
         
+# Function to check if two strings are anagrams of each other
 def is_anagram(s, t):
+    # Sort both strings alphabetically
+    # Example: "listen" → ['e', 'i', 'l', 'n', 's', 't']
     s1 = sorted(s)
     t1 = sorted(t)
+    # Compare the sorted versions of both strings
+    # If they are identical, it means they contain the same letters
     if s1 == t1:
-        return True
-    return False
-
-print(is_anagram('ana', 'nap'))
+        return True   # Strings are anagrams
+    return False       # Strings are not anagrams
