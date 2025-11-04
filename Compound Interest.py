@@ -16,8 +16,16 @@
 # Year 2: 600 grows by 10% (interest = 10% of 600 = 60), totaling 660. Adding 50, we reach 710.
 # Year 3: 710 grows by 10% (interest = 10% of 710 = 71), totaling 781. Adding 50 results in 831.
 
+# Function to calculate compound interest with annual contributions
 def compound_interest(principal, rate, contribution, years):
+    
+    # Loop runs once for each year of investment
     for i in range(years):
-        ci_for_that_year = principal*rate/100
+        # Calculate interest earned for the current year
+        ci_for_that_year = principal * rate / 100
+        
+        # Update principal by adding both the earned interest and the annual contribution
         principal += ci_for_that_year + contribution
+    
+    # Round the final amount to two decimal places for currency formatting
     return round(principal, 2)
