@@ -21,14 +21,26 @@
 from functools import reduce
 
 def max_avg_subarray(nums, k):
-	ls = []
-	for i in range(len(nums)-k+1):
-		ls.append(nums[i:i+k])
-	dict1 = {}
-	for i in ls:
-		dict1[reduce(lambda x,y:x+y, i)] = i
-	ct = -100000
-	for i in dict1.keys():
-		if i > ct:
-			ct = i
-	return round(reduce(lambda x,y:x+y, dict1[ct])/k,2)
+    # Create a list to store all possible subarrays of length k
+    ls = []
+    for i in range(len(nums) - k + 1):
+        # Slice the array to get a subarray of length k
+        ls.append(nums[i:i + k])
+    
+    # Create a dictionary to map the sum of each subarray to the subarray itself
+    dict1 = {}
+    for i in ls:
+        # Calculate the sum of the subarray using reduce
+        dict1[reduce(lambda x, y: x + y, i)] = i
+
+    # Initialize variable to store the maximum sum found so far
+    ct = -100000  # A very small number to start with
+    
+    # Find the maximum sum among all subarrays
+    for i in dict1.keys():
+        if i > ct:
+            ct = i
+    
+    # Compute and return the average of the subarray with the maximum sum
+    # Round the result to 2 decimal places
+    return round(reduce(lambda x, y: x + y, dict1[ct]) / k, 2)
