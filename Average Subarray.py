@@ -27,11 +27,8 @@ def max_avg_subarray(nums, k):
 	dict1 = {}
 	for i in ls:
 		dict1[reduce(lambda x,y:x+y, i)] = i
-	print(dict1)
 	ct = -100000
 	for i in dict1.keys():
 		if i > ct:
 			ct = i
-	print(dict1[ct])	
-
-max_avg_subarray([1, 2, -5, -3, 10, 3], 3)
+	return round(reduce(lambda x,y:x+y, dict1[ct])/k,2)
