@@ -29,19 +29,35 @@
 # The only place where we can place a video ad is at the end of feed_items, so we can't insert all 2 video ads 
 # as requested, hence we return False.
 
-def can_insert_ads(feed_items, n):
-    ct=0
-    for i in range(len(feed_items)-1):
-        if feed_items[i] == 0 and feed_items[i+1] == 0:
-            ct +=1
-    if feed_items[0] == 0:
-        ct +=1
-    if feed_items[-1] == 0:
-        ct +=1
-    if ct>=n:
-        return True
-    return False
 
-print(can_insert_ads(feed_items = [1, 2, 0, 0, 0], n = 3))
+def can_insert_ads(feed_items, n):
+    # Count of how many video ads we can insert
+    ct = 0
+    
+    # Iterate through the feed to find consecutive normal posts (0, 0)
+    # Each such pair gives one possible insertion spot between them.
+    for i in range(len(feed_items) - 1):
+        # If two adjacent items are both normal posts, 
+        # we can insert a video ad between them.
+        if feed_items[i] == 0 and feed_items[i + 1] == 0:
+            ct += 1
+    
+    # If the first item is a normal post (0),
+    # we can also consider placing a video ad before it (at the start of the feed).
+    if feed_items[0] == 0:
+        ct += 1
+    
+    # If the last item is a normal post (0),
+    # we can consider placing a video ad after it (at the end of the feed).
+    if feed_items[-1] == 0:
+        ct += 1
+    
+    # If the number of possible placements is at least `n`,
+    # then it's possible to insert all the requested video ads.
+    if ct >= n:
+        return True
+    
+    # Otherwise, not enough valid slots are available.
+    return False
     
     
