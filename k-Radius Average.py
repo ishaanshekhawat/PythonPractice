@@ -15,21 +15,35 @@
 from functools import reduce
 
 def k_radius_avg(nums, k):
-    big_ls = []
+    big_ls = []  # This will store the subarrays (or placeholders) for each index
+
+    # Loop through each index in the nums array
     for i in range(len(nums)):
-        ls = []
+        ls = []  # Temporary list to hold the subarray centered at index i
+
+        # If there aren't enough elements to the left or right of index i,
+        # append -1 (as per the problem statement)
         if i - k < 0 or i + k >= len(nums):
             ls.append(-1)
         else:
+            # Otherwise, collect all elements within the range [i - k, i + k]
             for j in range(i - k, i + k + 1):
                 ls.append(nums[j])
+
+        # Add this subarray (or [-1]) to our big list
         big_ls.append(ls)
-    avg_ls = []
+
+    avg_ls = []  # This will store the final averages for each index
+
+    # Calculate the average for each subarray in big_ls
     for i in big_ls:
+        # Compute average only if the list is a real subarray (not [-1])
         avg_ls.append(round(reduce(lambda x, y: x + y, i) / len(i), 2))
+
+    # Return the list of k-radius averages
     return avg_ls
 
-print(k_radius_avg(nums = [7, 2, 5, 12, 9, 4, 1], k = 2))
 
-
-
+# Example usage:
+print(k_radius_avg(nums=[7, 2, 5, 12, 9, 4, 1], k=2))
+# Expected output: [-1, -1, 7.0, 6.4, 6.2, -1, -1]
