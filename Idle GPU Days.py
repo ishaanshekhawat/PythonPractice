@@ -30,12 +30,23 @@
 # The GPUs didn’t get a single day off. Your team will just have to wait patiently until the chaos subsides.
 
 def gpu_idle_days(days, training_sessions):
+    # Create a set to store all the days when GPUs are being used
     s1 = set()
+
+    # Iterate over each team's training session
     for i in training_sessions:
-        for j in range(i[0],i[1]+1):
+        # For each session, mark every day from start_i to end_i (inclusive) as "in use"
+        for j in range(i[0], i[1] + 1):
             s1.add(j)
+
+    # Create a list to store days when GPUs are idle (not in use)
     ls = []
-    for i in range(1,days+1):
+
+    # Check every day from 1 to 'days'
+    for i in range(1, days + 1):
+        # If a day is not in the set of used days, it’s idle
         if i not in s1:
             ls.append(i)
+
+    # Return the total count of idle days
     return len(ls)
