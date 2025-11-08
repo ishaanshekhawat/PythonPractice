@@ -13,28 +13,38 @@
 # Output: [2, 3]
 
 def most_popular(nums, n):
-	dict1 = {}
-	for i in range(len(nums)):
-		if nums[i] in dict1.keys():
-			dict1[nums[i]] += 1
-		else:
-			dict1[nums[i]] = 1
-	print(dict1)
-	dict2 = dict(sorted(dict1.items(), key = lambda x: x[1], reverse=True))
-	print(dict2)
-	ct = 0
-	ls = []
-	for k,v in dict2.items():
-		ls.append(k)
-		ct += 1
-		if ct == 3:
-			break
-	for i in range(len(ls)):
-		for j in range(len(ls)-1):
-			if ls[j] > ls[i]:
-				ls[j],ls[i]=ls[i],ls[j]
-	print(ls)
-	
-	
-			
-most_popular(nums = [2, 1, 2, 3, 2, 1, 2, 1, 3, 4, 4, 4], n = 3)
+    # Create an empty dictionary to count occurrences of each number
+    dict1 = {}
+
+    # Loop through each number in the list
+    for i in range(len(nums)):
+        # If the number already exists in the dictionary, increment its count
+        if nums[i] in dict1.keys():
+            dict1[nums[i]] += 1
+        # Otherwise, add it to the dictionary with an initial count of 1
+        else:
+            dict1[nums[i]] = 1
+
+    # Sort the dictionary by values (counts) in descending order
+    # dict1.items() → list of (key, value) pairs
+    # key=lambda x: x[1] → sort by value (the count)
+    # reverse=True → highest counts first
+    dict2 = dict(sorted(dict1.items(), key=lambda x: x[1], reverse=True))
+
+    ct = 0          # Counter to keep track of how many top elements we've collected
+    ls = []         # List to store the top n most frequent numbers
+
+    # Loop through the sorted dictionary
+    for k, v in dict2.items():
+        ls.append(k)  # Add the number (key) to the list
+        ct += 1
+        if ct == n:   # Stop once we've collected n items
+            break
+
+    # Sort the top n numbers in ascending order before returning
+    for i in range(len(ls)):
+        for j in range(len(ls) - 1):
+            if ls[j] > ls[i]:
+                ls[j], ls[i] = ls[i], ls[j]
+
+    return ls  # Return the list of most popular numbers
