@@ -22,10 +22,19 @@
 # Explanation: There are no two elements we can pick that sum up to 2. Remember, you can't use the same element twice!
 
 def two_sum(nums: list[int], target: int) -> list[int]:
-    for i in range(len(nums)-1):
-        for j in range(1,len(nums)):
-            if nums[i] + nums[j] == 10:
-                return [i,j]
-    return [-1,-1]
+    # Outer loop iterates through each element except the last one,
+    # since we'll be pairing it with subsequent elements.
+    for i in range(len(nums) - 1):
+        # Inner loop should start from i + 1 (not 1),
+        # to ensure we don’t reuse the same element and don’t repeat pairs.
+        for j in range(i + 1, len(nums)):
+            # Check if the sum of the two elements equals the target
+            if nums[i] + nums[j] == target:
+                # If found, return their indices in increasing order
+                return [i, j]
+    # If no valid pair found, return [-1, -1]
+    return [-1, -1]
 
-print(two_sum(nums = [1, 4, 6, 10], target = 11))
+
+# Example test case
+print(two_sum(nums=[1, 4, 6, 10], target=11))  # Expected output: [0, 3]
