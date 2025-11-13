@@ -9,14 +9,25 @@ import math
 from functools import reduce
 
 def corr(x, y):
-	meanX = reduce(lambda x,y:x+y, x)/len(x)
-	meanY = reduce(lambda x,y:x+y, y)/len(y)
-	sigX = 0
-	sigY = 0
-	covXY = 0
+	# Calculate mean of list x using reduce (sum of elements / number of elements)
+	meanX = reduce(lambda x, y: x + y, x) / len(x)
+	# Calculate mean of list y
+	meanY = reduce(lambda x, y: x + y, y) / len(y)
+	
+	# Initialize variables for covariance and variances
+	sigX = 0   # Sum of squared deviations for x
+	sigY = 0   # Sum of squared deviations for y
+	covXY = 0  # Covariance numerator accumulator
+	
+	# Loop over all data points
 	for i in range(len(x)):
-		covXY += (x[i]-meanX)*((y[i]-meanY))
-		sigX += (x[i]-meanX)**2
-		sigY += (y[i]-meanY)**2
-	return covXY/math.sqrt(sigX*sigY)
+		# Increment covariance numerator
+		covXY += (x[i] - meanX) * ((y[i] - meanY))
+		# Increment variance components for x and y
+		sigX += (x[i] - meanX) ** 2
+		sigY += (y[i] - meanY) ** 2
+	
+	# Return Pearson correlation coefficient
+	# Formula: cov(X,Y) / sqrt(var(X) * var(Y))
+	return covXY / math.sqrt(sigX * sigY)
 		
