@@ -33,17 +33,24 @@
 # while the highest card is just $9. Looks like everyone will be going home empty-handed!
 
 def max_satisfaction(expectations, cards):
+    # Sort both expectations and cards in ascending order
     expectations.sort()
     cards.sort()
-    # print(expectations)
-    # print(cards)
+    
+    # Initialize an empty dictionary to store matched pairs
     dict1 = {}
-    for i in range(min(len(expectations),len(cards))):
+    
+    # Iterate through the expectations, matching each with the smallest card that is >= expectation
+    for i in range(min(len(expectations), len(cards))):
+        # If the current card can satisfy the expectation, store it in the dictionary
         if expectations[i] <= cards[i]:
             dict1[expectations[i]] = cards[i]
         else:
-            for j in range(i+1, len(cards)):
+            # If the current card cannot satisfy the expectation, find the next card that can
+            for j in range(i + 1, len(cards)):
                 if expectations[i] <= cards[j]:
                     dict1[expectations[i]] = cards[j]
-                    break
-    return len(dict1)   
+                    break  # Break once a valid card is found for the current expectation
+    
+    # Return the number of matched pairs (i.e., the length of the dictionary)
+    return len(dict1)
