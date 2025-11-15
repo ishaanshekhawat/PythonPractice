@@ -16,9 +16,13 @@
 # Explanation: The values at indices 2 and 3 (4 and 5, respectively) add up to 9.
 
 def sorted_two_sum(nums, target):
-	for i in range(len(nums)-1):
-		for j in range(i+1,len(nums)):
-		    if nums[j] == target - nums[i]:
-		        return [i,j]
-	return [-1,-1]
-			
+    # Iterate through the list of numbers
+    for i in range(len(nums)-1):
+        # Check all subsequent numbers after the current number at index i
+        for j in range(i+1, len(nums)):
+            # If the sum of the two numbers at indices i and j equals the target
+            if nums[j] == target - nums[i]:
+                # Return the indices of these two numbers
+                return [i, j]
+    # If no pair was found that adds up to the target, return [-1, -1]
+    return [-1, -1]
