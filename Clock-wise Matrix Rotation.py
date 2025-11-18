@@ -15,8 +15,6 @@ def rotate(matrix):
 
     # Step 2: Reverse each row of the transposed matrix to rotate it 90 degrees
     # Initialize the new matrix for the rotated result
-    left = 0
-    right = len(m1[0]) - 1  # Right index of the row (same as number of columns - 1)
 
     m2 = []
     for i in range(rl):
