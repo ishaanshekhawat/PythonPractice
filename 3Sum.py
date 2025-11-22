@@ -23,14 +23,33 @@
 
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
+        # This list will store all unique triplets that sum to zero
         sol = []
-        for i in range(len(nums)-2):
-            for j in range(i+1, len(nums)-1):
-                target = - nums[i] - nums[j]
-                for k in range(j+1, len(nums)):
+
+        # Loop through each element as the first number of the triplet
+        for i in range(len(nums) - 2):
+
+            # Loop through elements after i as the second number
+            for j in range(i + 1, len(nums) - 1):
+
+                # Determine the value needed to reach a sum of zero
+                # nums[i] + nums[j] + target == 0 → target = -(nums[i] + nums[j])
+                target = -nums[i] - nums[j]
+
+                # Loop through elements after j as the third number
+                for k in range(j + 1, len(nums)):
+
+                    # Check if nums[k] completes the triplet
                     if nums[k] == target:
-                        if sorted([nums[i], nums[j], nums[k]]) in sol:
+
+                        # Sort the triplet to avoid duplicate permutations
+                        triplet = sorted([nums[i], nums[j], nums[k]])
+
+                        # Only add if this exact triplet hasn't been added before
+                        if triplet in sol:
                             continue
                         else:
-                            sol.append(sorted([nums[i], nums[j], nums[k]]))
+                            sol.append(triplet)
+
+        # Return the list of unique triplets
         return sol
