@@ -25,28 +25,47 @@
 
 class Solution(object):
     def plusOne(self, digits):
+        # Start from the last digit using negative indexing
         i = -1
-        ct=0
+        ct = 0  # Counter for how many trailing 9s we have
+
+        # Special case: if the number is exactly [9], result must be [1, 0]
         if digits == [9]:
-            return [1,0]
+            return [1, 0]
+
+        # Case 1: last digit is 9 – we need to handle carries
         elif digits[-1] == 9:
+
+            # Count how many trailing 9s the number has
             while digits[i] == 9:
                 i -= 1
                 ct += 1
+
+                # If we've gone past the entire list, stop
                 if abs(i) > len(digits):
                     break
-            for j in range(ct):
+
+            # Remove all trailing 9s
+            for _ in range(ct):
                 digits.pop()
+
+            # If there are digits left, increment the new last digit
             if digits != []:
                 last = digits[-1]
                 digits.pop()
-                digits.append(last+1)
+                digits.append(last + 1)
             else:
+                # If all digits were 9, we start with 1
                 digits.append(1)
-            for j in range(ct):
+
+            # Add zeros for each removed 9 (since 9 + 1 => 0 with carry)
+            for _ in range(ct):
                 digits.append(0)
+
+        # Case 2: last digit is not 9 – simple increment
         else:
             last = digits[-1]
             digits.pop()
-            digits.append(last+1)
+            digits.append(last + 1)
+
         return digits
